@@ -71,20 +71,5 @@
     </div>
 </div>
 
-<div id="result" class="mt-4">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div id="flash-message" class="flash-result">
-                {% for category, message in messages %}
-                    {% if category == 'error' %}
-                        <span style="color: red;">{{ message }}</span>
-                    {% else %}
-                        <span>{{ message }}</span>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
-</div>
 
 {% endblock %}
