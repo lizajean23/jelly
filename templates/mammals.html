@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="header">Mammals</h1>
+
+<div class="card-grid">
+    {% for each in animals_on_page %}
+    <a href="{{ url_for('redirecting', pressed=each.common_name) }}">
+        <div class="card" style="width: 17rem;">
+            <img src="{{ each.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">
+                    {{ each.common_name }}
+                </h5>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+
+<div class="pagination d-flex justify-content-center mt-4">
+    {{ pagination.links }}
+</div>
+
+{% endblock %}

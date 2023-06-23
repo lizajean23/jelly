@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            max-width: 600px;
+            height: 450px;
+            margin: 50px auto ;
+            background-color: rgb(76, 143, 91);
+            border: 1px solid #329374;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #quiz-container {
+            text-align: center;
+        }
+
+        #question {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+
+        .form-check {
+            margin-bottom: 10px;
+            color: black;
+            border-color: black;
+        }
+
+        #submit-btn {
+            display: block;
+            margin: 0 auto;
+        }
+
+
+    </style>
+
+
+
+<h1 class="header">Quiz</h1>
+<div class="container">
+    <div id="quiz-container">
+        {% if result_message %}
+        <h2>Quiz Result</h2>
+        <div class="result">{{ result_message }}</div>
+        {% else %}
+        <h2>Quiz</h2>
+        <div id="question">{{ question }}</div>
+        <form action="{{ url_for('quiz') }}" method="post">
+            {% for option in options %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="option" value="{{ loop.index0 }}"
+                       {% if loop.index0==
+                       selected_option %}checked{% endif %}>
+                <label class="form-check-label">{{ option }}</label>
+            </div>
+            {% endfor %}
+            <button id="submit-btn" class="btn btn-primary" name="submit">Submit</button>
+
+        </form>
+
+        {% endif %}
+
+    </div>
+</div>
+
+<div id="result" class="mt-4">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-message" class="flash-result">
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                        <span style="color: red;">{{ message }}</span>
+                    {% else %}
+                        <span>{{ message }}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
+
+{% endblock %}

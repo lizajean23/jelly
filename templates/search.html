@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card-grids">
+    {% for each in animal_data %}
+    <div class="card" style="width: 17rem;">
+        <img src="{{ each.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ each.common_name }}</h5>
+            <p class="card-text">{{ each.facts }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            {% if each.size %}
+            <li class="list-group-item">Size: {{ each.size }}</li>
+            {% endif %}
+            {% if each.diet %}
+            <li class="list-group-item">Diet: {{ each.diet }}</li>
+            {% endif %}
+            {% if each.avg_life %}
+            <li class="list-group-item">Average life: {{ each.avg_life }}</li>
+            {% endif %}
+        </ul>
+
+    </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}

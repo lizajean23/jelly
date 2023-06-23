@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jelly</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+<style>
+    @import url('https://fonts.cdnfonts.com/css/austie-bost-kitten-klub');
+</style>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="color: rgba(16,32,93,0.81)">Jelly</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{url_for('home')}}"
+                       style="color: rgba(16,32,93,0.81)">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{url_for('quiz')}}"
+                       style="color: rgba(16,32,93,0.81)">Quiz</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false" style="color: rgba(16,32,93,0.81)">
+                        Facts
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{url_for('mammals')}}">Mammals</a></li>
+                        <li><a class="dropdown-item" href="{{url_for('reptiles')}}">Reptiles</a></li>
+
+                        <li><a class="dropdown-item" href="{{url_for('invertebrates')}}">Invertebrates</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" role="search" action="{{ url_for('search') }}">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                       style="color: rgba(16,32,93,0.81)" name="searched">
+
+                <button class="btn btn-outline-success" type="submit" style="color: rgba(16,32,93,0.81)">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-danger flash-container" role="alert">
+    <svg id="" style="width: 16px; display: inline;" xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </svg>
+        <span class="{{ category }}" style="color: red;">{{ message }}</span>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{%block content%}
+<div class="container">
+    <div class="item1">
+        <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://i.pinimg.com/564x/2e/c0/77/2ec0773a1fcd847a5bd258ea4bba668e.jpg"
+                         class="d-block w-100" style="width: auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.pinimg.com/564x/f6/8c/29/f68c29a643ef07cd87b7ed6196200724.jpg"
+                         class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.pinimg.com/564x/b0/3f/78/b03f784947a7c49c7c8f27ee6e3aaa63.jpg"
+                         class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="coloumn2">
+        <div class="item2">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://i.pinimg.com/564x/df/a2/f5/dfa2f5edf7ee7cc9ace28fff0ae92422.jpg"
+                             class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Octopus</h5>
+                            <p class="card-text"> Octopuses have three hearts, which is partly a consequence of having blue blood. </p>
+                            <p class="card-text"><small class="text-body-secondary">SIZE: 12 to 36 inches</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item3">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://i.pinimg.com/564x/b8/2f/61/b82f6130b6a8d6afbefc07b08e1f8750.jpg"
+                             class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">SEAL</h5>
+                            <p class="card-text">Harp seal mothers are able to identify their babies by their smell.</p>
+                            <p class="card-text"><small class="text-body-secondary">SIZE: 5.25 to 6.25 feet</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item4">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://i.pinimg.com/736x/c4/75/07/c47507ca12a0456ae0e911fa5b728ba4.jpg"
+                             class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">GIANT PANDA</h5>
+                            <p class="card-text">Pandas are shy; they don't venture into areas where people live. This
+                                restricts pandas to very limited areas.</p>
+                            <p class="card-text"><small class="text-body-secondary">4 to 5 feet</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+</html>
